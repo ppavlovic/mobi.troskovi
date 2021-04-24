@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_row(form.report_csv) }}
+    <button type="submit">Posalji</button>
+    {{ form_end(form) }}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table style="border: 1px solid coral; width: 90%">
+        <thead>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Purpose Description</td>
+                <td>Amount</td>
+                <td>Date</td>
+                <td>Category</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in expenseItems %}
+            {# @var item \App\Domain\Mobi\ExpenseItem #}
+            <tr style="border: 1px solid black">
+                <td></td>
+                <td></td>
+                <td>{{ item.purposeDescription }}</td>
+                <td>{{ item.currency.amount }} {{ item.currency.code }}</td>
+                <td>{{ item.valueDate.format('d.m.Y.') }}</td>
+                <td>{{ item.category }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}
+
