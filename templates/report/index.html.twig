@@ -1,10 +1,14 @@
 {% extends "base.html.twig" %}
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+
 {% block body %}
+    <h1>Ubacite izvod iz banke</h1>
 
     {{ form_start(form) }}
     {{ form_row(form.report_csv) }}
-    <button type="submit">Posalji</button>
+    <button type="submit" class="btn btn-primary">Posalji</button>
     {{ form_end(form) }}
 
 {% endblock %}
