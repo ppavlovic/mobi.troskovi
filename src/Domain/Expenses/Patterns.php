@@ -3,7 +3,6 @@
 
 namespace App\Domain\Expenses;
 
-
 use App\Domain\Mobi\ExpenseItem;
 use Symfony\Component\Yaml\Yaml;
 
@@ -14,7 +13,7 @@ class Patterns
      */
     private $patterns;
 
-    public function loadFromYaml()
+    public function loadFromYaml(): void
     {
         $values = Yaml::parse(file_get_contents(__DIR__ . '/patterns.yml'));
 
@@ -27,12 +26,18 @@ class Patterns
         }
     }
 
-    public function categorize(ExpenseItem $expenseItem)
+    public function categorize(ExpenseItem $expenseItem): void
     {
+        $matchFound = false;
         foreach ($this->patterns as $pattern) {
             if ($pattern->match($expenseItem->purposeDescription())) {
+                $matchFound = true;
                 $expenseItem->belongsTo($pattern->category());
             }
+        }
+
+        if (!$matchFound) {
+            $expenseItem->belongsToUncategorized();
         }
     }
 }

@@ -3,7 +3,6 @@
 
 namespace App\Domain\Currency;
 
-
 use MyCLabs\Enum\Enum;
 
 class CurrencyCode extends Enum

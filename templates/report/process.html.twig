@@ -2,7 +2,14 @@
 
 {% block body %}
 
-    <h1>Report</h1>
+    <h1>Izveštaj troškova</h1>
+
+    <a class="text-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Prikaži transakcije
+    </a>
+
+    <div class="collapse" id="collapseExample">
+        <h2>Pojedinačne transakcije</h2>
 
     <table class="table table-bordered table-striped table-responsive-lg">
         <thead>
@@ -16,7 +23,7 @@
         <tbody>
         {% for item in expenseItems %}
             {# @var item \App\Domain\Mobi\ExpenseItem #}
-            <tr style="border: 1px solid black">
+            <tr>
                 <td>{{ item.purposeDescription }}</td>
                 <td class="text-right">{{ item.currency.amount | number_format }} {{ item.currency.code }}</td>
                 <td>{{ item.valueDate.format('d.m.Y.') }}</td>
@@ -25,6 +32,32 @@
         {% endfor %}
         </tbody>
     </table>
-    
+    </div>
+
+    {% for categoryName, expenseItems in report %}
+    <h2>Prikaz po kategorijama</h2>
+    <table class="table table-bordered table-striped table-responsive-lg">
+        <thead>
+            <tr>
+                <th colspan="3">{{ categoryName }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in expenseItems %}
+            <tr>
+                <td>{{ item.purposeDescription }}</td>
+                <td>{{ item.valueDate.format('d.m.Y.') }}</td>
+                <td class="text-right">{{ item.currency.amount | number_format }} {{ item.currency.code }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" class="text-right">Total:</td>
+                <td class="text-right">&lt; &gt;</td>
+            </tr>
+        </tfoot>
+    </table>
+    {% endfor %}
 {% endblock %}
 

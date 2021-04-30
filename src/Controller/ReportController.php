@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Domain\Expenses\Patterns;
 use App\Domain\Mobi\Parser\CsvParser;
+use App\Domain\Mobi\Report\ReportGenerator;
 use App\Form\ReportUploadType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -54,11 +55,14 @@ class ReportController extends AbstractController
             $patterns->categorize($expenseItem);
         }
 
+        $reportGenerator = new ReportGenerator(...$expenseItems);
+        $reportGenerator->analyze();
 
         return $this->render(
             'report/process.html.twig',
             [
-                'expenseItems' => $expenseItems
+                'expenseItems' => $expenseItems,
+                'report' => $reportGenerator->report(),
             ]
         );
     }

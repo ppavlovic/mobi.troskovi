@@ -3,7 +3,6 @@
 
 namespace App\Domain\Mobi;
 
-
 use App\Domain\Currency\Currency;
 use App\Domain\Expenses\Category;
 
@@ -39,8 +38,14 @@ class ExpenseItem
      */
     private $category;
 
-    public function __construct(string $creditorName, string $creditorAccountNumber, Currency $currency, string $purposeDescription, int $purposeCode, \DateTime $valueDate)
-    {
+    public function __construct(
+        string $creditorName,
+        string $creditorAccountNumber,
+        Currency $currency,
+        string $purposeDescription,
+        int $purposeCode,
+        \DateTime $valueDate
+    ) {
         $this->creditorName = $creditorName;
         $this->creditorAccountNumber = $creditorAccountNumber;
         $this->currency = $currency;
@@ -72,7 +77,12 @@ class ExpenseItem
         $this->category = $category;
     }
 
-    public function category()
+    public function belongsToUncategorized()
+    {
+        $this->category = Category::uncategorized();
+    }
+
+    public function category(): Category
     {
         return $this->category;
     }

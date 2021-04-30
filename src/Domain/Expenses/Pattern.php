@@ -3,7 +3,6 @@
 
 namespace App\Domain\Expenses;
 
-
 class Pattern
 {
     private $category;

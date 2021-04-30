@@ -3,7 +3,6 @@
 
 namespace App\Domain\Mobi\Parser;
 
-
 use App\Domain\Mobi\ExpenseItemFactory;
 
 class CsvParser
@@ -24,7 +23,7 @@ class CsvParser
         $fp = fopen($this->filename, 'rb');
         // skip first row
         fgets($fp);
-        while(!feof($fp)) {
+        while (!feof($fp)) {
             $line = fgets($fp);
             if (trim($line) !== '') {
                 $expenseItems[] = ExpenseItemFactory::fromCsv($line);

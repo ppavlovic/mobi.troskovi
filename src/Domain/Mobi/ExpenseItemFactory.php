@@ -3,7 +3,6 @@
 
 namespace App\Domain\Mobi;
 
-
 use App\Domain\Currency\Currency;
 use App\Domain\Currency\CurrencyCode;
 
@@ -11,7 +10,15 @@ class ExpenseItemFactory
 {
     public static function fromCsv($row): ExpenseItem
     {
-        [$creditorName, $creditorAccountNumber, $currencyAmount, $currencyCode, $purposeDescription, $purposeCode, $valueDate] = str_getcsv($row);
+        [
+            $creditorName,
+            $creditorAccountNumber,
+            $currencyAmount,
+            $currencyCode,
+            $purposeDescription,
+            $purposeCode,
+            $valueDate,
+        ] = str_getcsv($row);
 
         return new ExpenseItem(
             trim($creditorName),
